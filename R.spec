@@ -25,7 +25,7 @@
 #-----------------------------------------------------------------------
 Name:		R
 Version:	2.14.1
-Release:	1
+Release:	2
 Summary:	A language for data analysis and graphics
 URL:		http://www.r-project.org
 Source0:	ftp://cran.r-project.org/pub/R/src/base/R-2/R-%{version}.tar.gz
@@ -304,6 +304,12 @@ export R_PDFVIEWER="%{_bindir}/xdg-open"
 export R_PRINTCMD="lpr"
 export R_BROWSER="%{_bindir}/xdg-open"
 
+# instead of "BuildConflicts: R-core" and/or R-foo packages
+if [ -x %{bindir}/Rscript ]; then
+    mkdir bin
+    ln -sf bin/R bin/Rscript
+fi
+
 export FCFLAGS="%{optflags}"
 %if %{with java}
     export JAVA_HOME="%{java_home}"
@@ -394,6 +400,8 @@ chmod -x %{buildroot}%{_libdir}/R/library/mgcv/CITATION %{buildroot}%{_docdir}/R
 # fight rpm to convert a directory into a symlink if upgrading from
 # previous mandriva packages
 ln -sf ../%{_lib}/R/include %{buildroot}%{_includedir}/R
+
+ln -sf %{_docdir}/R %{buildroot}%{_libdir}/R/doc
 
 # Symbolic link for LaTeX
 mkdir -p %{buildroot}%{_texmfdir}/tex/latex

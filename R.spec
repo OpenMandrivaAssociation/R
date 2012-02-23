@@ -1,3 +1,5 @@
+%define		upgrade_from_2_12		1
+
 # (tpg) really not needed
 # for private copy in /usr/lib/R/share/perl/Text/DelimMatch.pm 
 %define _provides_exceptions KernSmooth.so\\|MASS.so\\|R_X11.so\\|class.so\\|cluster.so\\|foreign.so\\|grDevices.so\\|grid.so\\|internet.so\\|lapack.so\\|lattice.so\\|libRblas.so\\|libRlapack.so\\|methods.so\\|mgcv.so\\|nlme.so\\|nnet.so\\|rpart.so\\|spatial.so\\|splines.so\\|stats.so\\|survival.so\\|tcltk.so\\|tools.so\\|vfonts.so\\|perl\(R::.*\)
@@ -25,7 +27,7 @@
 #-----------------------------------------------------------------------
 Name:		R
 Version:	2.14.1
-Release:	2
+Release:	3
 Summary:	A language for data analysis and graphics
 URL:		http://www.r-project.org
 Source0:	ftp://cran.r-project.org/pub/R/src/base/R-2/R-%{version}.tar.gz
@@ -195,6 +197,13 @@ and called at run time.
     if [ $1 -eq 0 ] ; then
 	%{_sbindir}/texlive.post
     fi
+
+%if %{upgrade_from_2_12}
+%posttrans core
+    if [ ! -e %{_libdir}/R/doc ]; then
+	ln -sf %{_docdir}/R %{_libdir}/R/doc
+    fi
+%endif
 
 %files		core
 %{_bindir}/*
@@ -401,7 +410,9 @@ chmod -x %{buildroot}%{_libdir}/R/library/mgcv/CITATION %{buildroot}%{_docdir}/R
 # previous mandriva packages
 ln -sf ../%{_lib}/R/include %{buildroot}%{_includedir}/R
 
+%if !%{upgrade_from_2_12}
 ln -sf %{_docdir}/R %{buildroot}%{_libdir}/R/doc
+%endif
 
 # Symbolic link for LaTeX
 mkdir -p %{buildroot}%{_texmfdir}/tex/latex

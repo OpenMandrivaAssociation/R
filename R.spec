@@ -2,8 +2,8 @@
 
 # (tpg) really not needed
 # for private copy in /usr/lib/R/share/perl/Text/DelimMatch.pm 
-%define _provides_exceptions KernSmooth.so\\|MASS.so\\|R_X11.so\\|class.so\\|cluster.so\\|foreign.so\\|grDevices.so\\|grid.so\\|internet.so\\|lapack.so\\|lattice.so\\|libRblas.so\\|libRlapack.so\\|methods.so\\|mgcv.so\\|nlme.so\\|nnet.so\\|rpart.so\\|spatial.so\\|splines.so\\|stats.so\\|survival.so\\|tcltk.so\\|tools.so\\|vfonts.so\\|perl\(R::.*\)
-%define _requires_exceptions libRblas.so\\|libRlapack.so\\|perl\(R::.*\)
+%define __noautoprov 'KernSmooth.so\\|MASS.so\\|R_X11.so\\|class.so\\|cluster.so\\|foreign.so\\|grDevices.so\\|grid.so\\|internet.so\\|lapack.so\\|lattice.so\\|libRblas.so\\|libRlapack.so\\|methods.so\\|mgcv.so\\|nlme.so\\|nnet.so\\|rpart.so\\|spatial.so\\|splines.so\\|stats.so\\|survival.so\\|tcltk.so\\|tools.so\\|vfonts.so\\|perl\(R::.*\)'
+%define __noautoreq 'libRblas.so\\|libRlapack.so\\|perl\(R::.*\)'
 %define _disable_ld_no_undefined 1
 
 %bcond_without	system_pcre
@@ -26,8 +26,8 @@
 
 #-----------------------------------------------------------------------
 Name:		R
-Version:	2.14.1
-Release:	3
+Version:	2.15.0
+Release:	1
 Summary:	A language for data analysis and graphics
 URL:		http://www.r-project.org
 Source0:	ftp://cran.r-project.org/pub/R/src/base/R-2/R-%{version}.tar.gz
@@ -35,6 +35,7 @@ Source1:	macros.R
 Source2:	R-make-search-index.sh
 Source3:	R-icons-png.tar.bz2
 Source4:	R.bash_completion.bz2
+Source100:	R.rpmlintrc
 License:	GPLv2+
 Group:		Sciences/Mathematics
 BuildRequires:	bison
@@ -48,7 +49,7 @@ BuildRequires:	gcc-objc
 BuildRequires:	gettext-devel
 BuildRequires:	glibc-static-devel
 BuildRequires:	gpm-devel
-BuildRequires:	icu-devel
+BuildRequires:	icu-devel >= 49
 %if %{with java}
 BuildRequires:	java-rpmbuild
 %endif
@@ -83,8 +84,6 @@ Requires:	%{libRmath_devel} = %{EVRD}
 Requires:	x11-font-adobe-100dpi
 Obsoletes:	R-recommended <= 1.5.1
 Provides:	R-recommended
-# Submitted to upstream as bug #14813
-Patch0:		R-2.14.1-Adapt-to-PCRE-8.30.patch
 Patch1:		R-2.8.1-menu.patch
 Patch2:		R-2.10.1-gfxdemos.patch
 
@@ -167,11 +166,6 @@ computationally intensive tasks, C, C++ and Fortran code can be linked
 and called at run time.
 
 %post core
-    %_install_info R-admin.info
-    %_install_info R-R-exts.info
-    %_install_info R-R-FAQ.info
-    %_install_info R-intro.info
-    %_install_info R-lang.info
     %{_sbindir}/texlive.post
     %if %{with java}
     R CMD javareconf \
@@ -183,15 +177,6 @@ and called at run time.
 	JAVA_LD_LIBRARY_PATH=%{_jvmdir}/jre/lib/%{java_arch}/server:%{_jvmdir}/jre/lib/%{java_arch}:%{_jvmdir}/java/lib/%{java_arch}:/usr/java/packages/lib/%{java_arch}:/lib:/usr/lib \
 	> /dev/null 2>&1 || exit 0
     %endif
-
-%preun core
-    if [ $1 = 0 ]; then
-	%_remove_install_info R-admin.info
-	%_remove_install_info R-R-exts.info
-	%_remove_install_info R-R-FAQ.info
-	%_remove_install_info R-intro.info
-	%_remove_install_info R-lang.info
-    fi
 
 %postun core
     if [ $1 -eq 0 ] ; then
@@ -299,9 +284,6 @@ from the R project.  This package provides the static libRmath library.
 ########################################################################
 %prep
 %setup -q
-%if %{with system_pcre}
-%patch0 -p1
-%endif
 %patch1 -p1
 %patch2 -p1
 

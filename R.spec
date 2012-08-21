@@ -27,7 +27,7 @@
 #-----------------------------------------------------------------------
 Name:		R
 Version:	2.15.0
-Release:	1
+Release:	2
 Summary:	A language for data analysis and graphics
 URL:		http://www.r-project.org
 Source0:	ftp://cran.r-project.org/pub/R/src/base/R-2/R-%{version}.tar.gz
@@ -81,7 +81,7 @@ BuildRequires:	zlib-devel
 Requires:	R-devel = %{EVRD}
 # libRmath-devel will pull in libRmath
 Requires:	%{libRmath_devel} = %{EVRD}
-Requires:	x11-font-adobe-100dpi
+Suggests:	x11-font-adobe-100dpi
 Obsoletes:	R-recommended <= 1.5.1
 Provides:	R-recommended
 Patch1:		R-2.8.1-menu.patch

@@ -1,0 +1,7 @@
+sources:
+  "macros.R:"	90b86e167f7689041b1a2d8bdbc14ed783df6887
+  "R-2.15.0.tar.gz:"	a633f87fdbd22e8c371971c535ca815e63c297f6
+  "R.bash_completion.bz2:"	05ddebef0df16f0bf35aecc8fcb702ad5d106e5e
+  "R-icons-png.tar.bz2:"	4f025c2b40c752f36a4d841b93c730638ae7c040
+  "R-make-search-index.sh:"	ebea66be558a52e393bc73039155bad2e29b4152
+  "R.rpmlintrc:"	de266561df43ac16b110c3ead216fb5401415df7

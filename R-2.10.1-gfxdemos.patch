@@ -1,0 +1,12 @@
+diff -p -up R-2.10.1/src/library/tcltk/R/tkGUI.R.gfx R-2.10.1/src/library/tcltk/R/tkGUI.R
+--- R-2.10.1/src/library/tcltk/R/tkGUI.R.gfx	2009-03-20 00:05:10.000000000 +0100
++++ R-2.10.1/src/library/tcltk/R/tkGUI.R	2009-12-16 14:25:51.388974370 +0100
+@@ -55,6 +55,8 @@ tkStartGUI <- function() {
+           command=quote(demo(tkcanvas)))
+     tkadd(demoMenu,"command",label=gettext("R FAQ"),
+           command=quote(demo(tkfaq)))
++    tkadd(demoMenu,"command",label=gettext("Graphics"),
++          command=quote(demo(graphics)))
+ 
+     loadpackageWidget <- function()
+     {

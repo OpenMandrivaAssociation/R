@@ -26,8 +26,8 @@
 
 #-----------------------------------------------------------------------
 Name:		R
-Version:	2.15.0
-Release:	2
+Version:	2.15.1
+Release:	3
 Summary:	A language for data analysis and graphics
 URL:		http://www.r-project.org
 Source0:	ftp://cran.r-project.org/pub/R/src/base/R-2/R-%{version}.tar.gz
@@ -39,9 +39,9 @@ Source100:	R.rpmlintrc
 License:	GPLv2+
 Group:		Sciences/Mathematics
 BuildRequires:	bison
-BuildRequires:	blas-devel
+BuildRequires:	pkgconfig(blas)
 BuildRequires:	bzip2-devel
-BuildRequires:	cairo-devel
+BuildRequires:	pkgconfig(cairo)
 BuildRequires:	cups-common
 BuildRequires:	gcc-c++
 BuildRequires:	gcc-gfortran
@@ -54,20 +54,20 @@ BuildRequires:	icu-devel >= 49
 BuildRequires:	java-rpmbuild
 %endif
 BuildRequires:	jpeg-devel
-BuildRequires:	lapack-devel
+BuildRequires:	pkgconfig(lapack)
 BuildRequires:	less
-BuildRequires:	libice-devel
-BuildRequires:	libsm-devel
-BuildRequires:	libx11-devel
-BuildRequires:	libxmu-devel
-BuildRequires:	libxt-devel
-BuildRequires:	ncurses-devel
-BuildRequires:	pango-devel
+BuildRequires:	pkgconfig(ice)
+BuildRequires:	pkgconfig(sm)
+BuildRequires:	pkgconfig(x11)
+BuildRequires:	pkgconfig(xmu)
+BuildRequires:	pkgconfig(xt)
+BuildRequires:	pkgconfig(ncurses)
+BuildRequires:	pkgconfig(pango)
 BuildRequires:	paper-utils
 %if %{with system_pcre}
-BuildRequires:	pcre-devel
+BuildRequires:	pkgconfig(libpcre)
 %endif
-BuildRequires:	png-devel
+BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pth-devel
 BuildRequires:	readline-devel
 BuildRequires:	tcl-devel
@@ -423,3 +423,281 @@ tar xjf %{SOURCE3} -C %{buildroot}%{_iconsdir}
 # (tpg) add bash completion file
 mkdir -p %{buildroot}%{_sysconfdir}/bash_completion.d
 bzcat %{SOURCE4} > %{buildroot}%{_sysconfdir}/bash_completion.d/R-base
+
+
+%changelog
+* Tue Aug 21 2012 Paulo Andrade <pcpa@mandriva.com.br> 2.15.0-2
++ Revision: 815582
+- Do not require packages in non free.
+
+* Sun Apr 08 2012 Bernhard Rosenkraenzer <bero@bero.eu> 2.15.0-1
++ Revision: 789887
+- Rebuild w/ current icu
+- Update to 2.15.0
+
+* Thu Feb 23 2012 Paulo Andrade <pcpa@mandriva.com.br> 2.14.1-3
++ Revision: 779406
+- Add a compile time flag to upgrade cleanly from R 2.12.
+
+* Tue Feb 21 2012 Paulo Andrade <pcpa@mandriva.com.br> 2.14.1-2
++ Revision: 778336
+- Add documentation symlink from rpm docdir to R docdir.
+- Correct rebuild issues with rpmbuild with R-core installed.
+
+* Wed Feb 15 2012 Paulo Andrade <pcpa@mandriva.com.br> 2.14.1-1
++ Revision: 774567
+- Update to latest upstream release.
+- Rework package to benefit from R2spec.
+- Rework R to use fedora R2spec and update to latest version.
+
+* Tue Feb 14 2012 Paulo Andrade <pcpa@mandriva.com.br> 2.12.2-2
++ Revision: 774044
+- Correct build with newer libpcre.
+
+  + Oden Eriksson <oeriksson@mandriva.com>
+    - rebuilt for new pcre
+    - various fixes
+    - rebuilt against libtiff.so.5
+    - attempt to relink against libpng15.so.15
+
+* Mon Jun 06 2011 Funda Wang <fwang@mandriva.org> 2.12.2-1
++ Revision: 682951
+- new version 2.12.2
+
+* Sun Jun 05 2011 Funda Wang <fwang@mandriva.org> 2.12.0-6
++ Revision: 682811
+- rebuild for new icu
+
+* Mon Mar 14 2011 Funda Wang <fwang@mandriva.org> 2.12.0-5
++ Revision: 644526
+- rebuild for new icu
+
+* Wed Feb 02 2011 Funda Wang <fwang@mandriva.org> 2.12.0-4
++ Revision: 634989
+- rebuild
+- tighten BR
+
+* Sat Nov 27 2010 Funda Wang <fwang@mandriva.org> 2.12.0-3mdv2011.0
++ Revision: 601641
+- rebuild for liblzma
+
+* Mon Nov 08 2010 Funda Wang <fwang@mandriva.org> 2.12.0-2mdv2011.0
++ Revision: 594963
+- bump rel
+- try to export libR at least
+
+* Sat Nov 06 2010 Tomasz Pawel Gajc <tpg@mandriva.org> 2.12.0-1mdv2011.0
++ Revision: 594193
+- disable check on all archs
+- run checks only on ix86 arch
+- update to new version 2.12.0
+- add buildrequires on paper-utils
+
+* Thu Apr 22 2010 Frederik Himpe <fhimpe@mandriva.org> 2.11.0-1mdv2010.1
++ Revision: 537985
+- update to new version 2.11.0
+
+* Sun Mar 21 2010 Funda Wang <fwang@mandriva.org> 2.10.1-4mdv2010.1
++ Revision: 526042
+- rebuild for new icu
+
+* Sun Jan 10 2010 Oden Eriksson <oeriksson@mandriva.com> 2.10.1-3mdv2010.1
++ Revision: 488740
+- rebuilt against libjpeg v8
+
+  + Giuseppe Ghibò <ghibo@mandriva.com>
+    - Fix path for PDF manuals (needed by Tk gui).
+    - Add graphics (Patch5) demo to list of available demos in Tk Gui menu.
+    - make post script of cat of CONTENTS into index.txt more robust.
+
+* Tue Dec 15 2009 Frederik Himpe <fhimpe@mandriva.org> 2.10.1-1mdv2010.1
++ Revision: 479120
+- Update to new version 2.10.1
+- Remove string format patch: not needed anymore
+
+* Sun Nov 08 2009 Tomasz Pawel Gajc <tpg@mandriva.org> 2.10.0-1mdv2010.1
++ Revision: 463065
+- add buildrequires on icu-devel and lzma-devel
+- update to new version 2.10.0
+
+  + Olivier Blin <blino@mandriva.org>
+    - disable java on mips & arm (from Arnaud Patard)
+
+* Mon Aug 24 2009 Frederik Himpe <fhimpe@mandriva.org> 2.9.2-1mdv2010.0
++ Revision: 420514
+- Update to new version 2.9.2
+- Update string format patch
+
+* Sat Aug 15 2009 Oden Eriksson <oeriksson@mandriva.com> 2.9.0-2mdv2010.0
++ Revision: 416647
+- rebuilt against libjpeg v7
+
+* Sun Jun 14 2009 Tomasz Pawel Gajc <tpg@mandriva.org> 2.9.0-1mdv2010.0
++ Revision: 385948
+- update to new version 2.9.0
+
+* Wed Mar 18 2009 Tomasz Pawel Gajc <tpg@mandriva.org> 2.8.1-6mdv2009.1
++ Revision: 357464
+- disable for now checks for ix86, because they fails only in iurt
+- rebuild
+- rebuild
+- define _disable_ld_no_undefined 1, because i have no idea how to fix Makefile compressed into tarball, R kernel modules
+- patch 1 is not needed anymore
+- update to new version 2.8.1
+- export compiles flags by using %%setup_compile_flags macro
+
+  + Guillaume Rousse <guillomovitch@mandriva.org>
+    - add pth-devel and glibc-static-devel to build dependencies
+    - rebuild for latest tk libs
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild for new libreadline
+
+* Fri Oct 31 2008 Tomasz Pawel Gajc <tpg@mandriva.org> 2.8.0-1mdv2009.1
++ Revision: 299061
+- disable patch 3 for now
+- disable patch 1 for now
+- update to new version 2.8.0
+
+* Wed Sep 17 2008 Tomasz Pawel Gajc <tpg@mandriva.org> 2.7.2-2mdv2009.0
++ Revision: 285483
+- Patch3: security fix for CVE-2008-3931
+
+* Tue Aug 26 2008 Tomasz Pawel Gajc <tpg@mandriva.org> 2.7.2-1mdv2009.0
++ Revision: 276262
+- update to new version 2.7.2
+
+* Thu Aug 07 2008 Tomasz Pawel Gajc <tpg@mandriva.org> 2.7.1-2mdv2009.0
++ Revision: 266675
+- disable -ffast-math flag as it breaks tests
+- add conditionals for mdv 200900
+- Patch1: fix detection of bzip2 version
+- Patch2: fix underlinking (work in progress)
+- use %%{_prefix} instead of hardcoded /usr/local
+- compile against system wide blas and lapack (disabled --enable-BLAS-shlib)
+- use pth threads
+- use _disable_ld_no_undefined to fix build
+- add missing buildrequires on imake, gcc-objc, gcc-objc++ and gettext-devel
+- require x11-font-adobe-100dpi
+- add buildrequires on zip
+- do not set R_LIBS variable (#37781)
+- add requires on x11-font-adobe-75dpi, as it was pointed on cooker ML
+- try to build with enabled -ffast-math
+- update to new version 2.7.1
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild early 2009.0 package (before pixel changes)
+
+  + Pixel <pixel@mandriva.com>
+    - rpm filetriggers deprecates update_menus/update_scrollkeeper/update_mime_database/update_icon_cache/update_desktop_database/post_install_gconf_schemas
+    - fix typo calling %%clean_icon_cache in %%postun
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+* Thu Apr 24 2008 Tomasz Pawel Gajc <tpg@mandriva.org> 2.7.0-4mdv2009.0
++ Revision: 197249
+- add buildrequires on pango, cairo and tiff
+
+* Thu Apr 24 2008 Tomasz Pawel Gajc <tpg@mandriva.org> 2.7.0-3mdv2009.0
++ Revision: 197243
+- new version
+
+* Mon Feb 11 2008 Tomasz Pawel Gajc <tpg@mandriva.org> 2.6.2-3mdv2008.1
++ Revision: 165448
+- revert my last commit (lapack & blas)
+- use system blas and lapack libraries
+- add bash completion file
+
+* Mon Feb 11 2008 Tomasz Pawel Gajc <tpg@mandriva.org> 2.6.2-2mdv2008.1
++ Revision: 165176
+- use xdg-open instead of hardcoding pdfviewer and web browser
+
+* Sun Feb 10 2008 Tomasz Pawel Gajc <tpg@mandriva.org> 2.6.2-1mdv2008.1
++ Revision: 164979
+- enable java support
+- add missing build requires on bison and paper-utils
+- export FCFLAGS and OBJCFLAGS
+- use xpdf as a default pdf viewer
+- do not compile with -ffast-math, as it breaks checks
+- new version 2.6.2
+
+* Wed Dec 19 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 2.6.1-4mdv2008.1
++ Revision: 133819
+- fix exceptions for package requires
+
+* Sun Dec 16 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 2.6.1-3mdv2008.1
++ Revision: 120664
+- add requires exceptions on perl(R::*)
+- new license policy
+- do not package COPYING file
+- add missing scriplets
+
+* Wed Dec 12 2007 Guillaume Rousse <guillomovitch@mandriva.org> 2.6.1-2mdv2008.1
++ Revision: 118467
+- don't provide private perl libraries
+  don't even ship private copies of standard ones
+
+* Tue Nov 27 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 2.6.1-1mdv2008.1
++ Revision: 113286
+- new version
+
+* Tue Oct 09 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 2.6.0-1mdv2008.1
++ Revision: 96121
+- new version
+- requires tk
+
+* Fri Sep 07 2007 Anssi Hannula <anssi@mandriva.org> 2.5.1-3mdv2008.0
++ Revision: 82069
+- buildrequires tcl-devel
+- rebuild for new soname of tcl
+
+* Thu Sep 06 2007 Adam Williamson <awilliamson@mandriva.org> 2.5.1-2mdv2008.0
++ Revision: 81307
+- menu entry fix for #33216
+
+* Tue Jul 03 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 2.5.1-1mdv2008.0
++ Revision: 47695
+- drop patch 1
+- new version
+
+* Sat Jun 16 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 2.5.0-7mdv2008.0
++ Revision: 40396
+- blacklist self-requires on libraries
+
+* Sat Jun 16 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 2.5.0-6mdv2008.0
++ Revision: 40300
+- really remove unneeded requires
+- blacklist libraries as a provides
+
+* Fri Jun 15 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 2.5.0-5mdv2008.0
++ Revision: 39940
+- blacklist lapack.so from provides
+- fix bug #31177
+- evince is now default pdf viewer
+- fix file list
+- get rid of ld.so.conf.d stuff
+
+* Sat May 05 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 2.5.0-4mdv2008.0
++ Revision: 23202
+- R doesn't set its own library path, now it does
+- correct requires on R and libRmath
+- drop unused directory
+
+* Thu May 03 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 2.5.0-3mdv2008.0
++ Revision: 21963
+- enable libRmath compiling
+- add reworked P1 from Fedora
+- added some stuff - hope rkward will work
+
+* Mon Apr 30 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 2.5.0-2mdv2008.0
++ Revision: 19462
+- remove buildrequires on liblapack-devel
+- drop P0 (seems to be not needed)
+- revoke dead configure options and add new ones
+- fix buildrequires
+- drop old menu style
+
+* Thu Apr 26 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 2.5.0-1mdv2008.0
++ Revision: 18415
+- new version
+- own missing files
+

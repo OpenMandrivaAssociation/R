@@ -86,6 +86,7 @@ Obsoletes:	R-recommended <= 1.5.1
 Provides:	R-recommended
 Patch1:		R-2.8.1-menu.patch
 Patch2:		R-2.10.1-gfxdemos.patch
+Patch3:		R-2.15.3-texinfo5.patch
 
 %description
 This is a metapackage that provides both core R userspace and 
@@ -286,6 +287,7 @@ from the R project.  This package provides the static libRmath library.
 %setup -q
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 #-----------------------------------------------------------------------
 %build

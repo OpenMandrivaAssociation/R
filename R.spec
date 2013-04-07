@@ -85,7 +85,7 @@ Suggests:	x11-font-adobe-100dpi
 Obsoletes:	R-recommended <= 1.5.1
 Provides:	R-recommended
 Patch1:		R-2.8.1-menu.patch
-Patch2:		R-2.10.1-gfxdemos.patch
+Patch2:		R-3.0.0-gfxdemos.patch
 
 %description
 This is a metapackage that provides both core R userspace and 

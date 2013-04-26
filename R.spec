@@ -27,7 +27,7 @@
 #-----------------------------------------------------------------------
 Name:		R
 Version:	3.0.0
-Release:	1
+Release:	2
 Summary:	A language for data analysis and graphics
 URL:		http://www.r-project.org
 Source0:	ftp://cran.r-project.org/pub/R/src/base/R-2/R-%{version}.tar.gz
@@ -86,6 +86,7 @@ Obsoletes:	R-recommended <= 1.5.1
 Provides:	R-recommended
 Patch1:		R-2.8.1-menu.patch
 Patch2:		R-3.0.0-gfxdemos.patch
+Patch3:		arm-perl-regexp.patch
 
 %description
 This is a metapackage that provides both core R userspace and 
@@ -286,6 +287,7 @@ from the R project.  This package provides the static libRmath library.
 %setup -q
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 #-----------------------------------------------------------------------
 %build

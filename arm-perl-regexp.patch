@@ -1,6 +1,6 @@
---- r-base-2.15.2.orig/src/library/tools/R/install.R
-+++ r-base-2.15.2/src/library/tools/R/install.R
-@@ -54,7 +54,11 @@
+--- r-base-3.0.1/src/library/tools/R/install.R.orig	2013-04-21 02:05:04.000000000 +0400
++++ r-base-3.0.1/src/library/tools/R/install.R	2013-06-11 13:35:26.933759960 +0400
+@@ -108,7 +108,11 @@
      SHLIB_EXT <- if (WINDOWS) ".dll" else {
          ## can we do better?
          mconf <- file.path(R.home(), paste0("etc", rarch), "Makeconf")
@@ -13,7 +13,7 @@
      }
  
      options(warn = 1)
-@@ -1616,8 +1620,13 @@
+@@ -1627,8 +1631,13 @@
          mconf <- readLines(file.path(R.home(),
                                       paste0("etc", Sys.getenv("R_ARCH")),
                                       "Makeconf"))

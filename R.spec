@@ -26,11 +26,11 @@
 
 #-----------------------------------------------------------------------
 Name:		R
-Version:	3.0.0
-Release:	2
+Version:	3.0.1
+Release:	1
 Summary:	A language for data analysis and graphics
 URL:		http://www.r-project.org
-Source0:	ftp://cran.r-project.org/pub/R/src/base/R-2/R-%{version}.tar.gz
+Source0:	ftp://cran.r-project.org/pub/R/src/base/R-3/R-%{version}.tar.gz
 Source1:	macros.R
 Source2:	R-make-search-index.sh
 Source3:	R-icons-png.tar.bz2
@@ -84,7 +84,7 @@ Requires:	%{libRmath_devel} = %{EVRD}
 Suggests:	x11-font-adobe-100dpi
 Obsoletes:	R-recommended <= 1.5.1
 Provides:	R-recommended
-Patch1:		R-2.8.1-menu.patch
+Patch1:		R-3.0.1-menu.patch
 Patch2:		R-3.0.0-gfxdemos.patch
 Patch3:		arm-perl-regexp.patch
 

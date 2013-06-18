@@ -27,7 +27,7 @@
 #-----------------------------------------------------------------------
 Name:		R
 Version:	3.0.1
-Release:	1
+Release:	2
 Summary:	A language for data analysis and graphics
 URL:		http://www.r-project.org
 Source0:	ftp://cran.r-project.org/pub/R/src/base/R-3/R-%{version}.tar.gz
@@ -197,7 +197,7 @@ and called at run time.
 %{_libdir}/R
 %exclude %{_libdir}/R/include
 %{_prefix}/lib/rpm/R-make-search-index.sh
-%{_infodir}/R-*.info*
+#%{_infodir}/R-*.info*
 %{_sysconfdir}/bash_completion.d/*
 %{_sysconfdir}/rpm/macros.d/macros.R
 %{_mandir}/man1/*
@@ -345,11 +345,12 @@ make -C src/nmath/standalone
 %make pdf
 %make info
 
+# Uncomment once we fix info pages for R
 # Convert to UTF-8
-for i in doc/manual/R-intro.info doc/manual/R-FAQ.info doc/FAQ doc/manual/R-admin.info doc/manual/R-exts.info-1; do
-    iconv -f iso-8859-1 -t utf-8 -o $i{.utf8,}
-    mv $i{.utf8,}
-done
+#for i in doc/manual/R-intro.info doc/manual/R-FAQ.info doc/FAQ doc/manual/R-admin.info doc/manual/R-exts.info-1; do
+#    iconv -f iso-8859-1 -t utf-8 -o $i{.utf8,}
+#    mv $i{.utf8,}
+#done
 
 #-----------------------------------------------------------------------
 %install

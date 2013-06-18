@@ -343,7 +343,7 @@ make -C src/nmath/standalone
 
 #make check-all
 %make pdf
-%make info
+# %make info
 
 # Uncomment once we fix info pages for R
 # Convert to UTF-8

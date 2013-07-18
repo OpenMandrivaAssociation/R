@@ -27,7 +27,7 @@
 #-----------------------------------------------------------------------
 Name:		R
 Version:	3.0.1
-Release:	2
+Release:	3
 Summary:	A language for data analysis and graphics
 URL:		http://www.r-project.org
 Source0:	ftp://cran.r-project.org/pub/R/src/base/R-3/R-%{version}.tar.gz
@@ -218,7 +218,7 @@ Requires:	R-core = %{EVRD}
 Requires:	bzip2-devel
 Requires:	gcc-c++
 Requires:	gcc-gfortran
-Requires:	libx11-devel
+Requires:	pkgconfig(x11)
 %if %{with system_pcre}
 Requires:	pcre-devel
 %endif

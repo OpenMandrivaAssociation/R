@@ -27,7 +27,7 @@
 #-----------------------------------------------------------------------
 Name:		R
 Version:	3.0.1
-Release:	3
+Release:	4
 Summary:	A language for data analysis and graphics
 URL:		http://www.r-project.org
 Source0:	ftp://cran.r-project.org/pub/R/src/base/R-3/R-%{version}.tar.gz
@@ -112,7 +112,6 @@ and called at run time.
 Summary:	The minimal R components necessary for a functional runtime
 Group:		Sciences/Mathematics
 Requires:	cups
-Requires:	gawk
 Requires:	less
 Requires:	perl
 Requires:	sed

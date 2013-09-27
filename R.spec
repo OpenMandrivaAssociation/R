@@ -196,7 +196,7 @@ and called at run time.
 %{_libdir}/R
 %exclude %{_libdir}/R/include
 %{_prefix}/lib/rpm/R-make-search-index.sh
-#%{_infodir}/R-*.info*
+%{_infodir}/R-*.info*
 %{_sysconfdir}/bash_completion.d/*
 %{_sysconfdir}/rpm/macros.d/macros.R
 %{_mandir}/man1/*

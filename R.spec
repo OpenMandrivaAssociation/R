@@ -27,7 +27,7 @@
 #-----------------------------------------------------------------------
 Name:		R
 Version:	3.0.2
-Release:	4
+Release:	5
 Summary:	A language for data analysis and graphics
 URL:		http://www.r-project.org
 Source0:	ftp://cran.r-project.org/pub/R/src/base/R-3/R-%{version}.tar.gz

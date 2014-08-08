@@ -26,8 +26,8 @@
 
 Summary:	A language for data analysis and graphics
 Name:		R
-Version:	3.0.2
-Release:	7
+Version:	3.1.1
+Release:	1
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		http://www.r-project.org
@@ -39,7 +39,6 @@ Source4:	R.bash_completion.bz2
 Source100:	R.rpmlintrc
 Patch1:		R-3.0.1-menu.patch
 Patch2:		R-3.0.0-gfxdemos.patch
-Patch3:		arm-perl-regexp.patch
 BuildRequires:	bison
 BuildRequires:	cups-common
 BuildRequires:	gcc-c++

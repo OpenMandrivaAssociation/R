@@ -2,3 +2,4 @@
 addFilter("E: info-files-with-install-info-postun")
 addFilter("E: info-files-with-install-info-postin")
 addFilter("E: non-versioned-file-in-library-package")
+addFilter("E: devel-file-in-non-devel-package")

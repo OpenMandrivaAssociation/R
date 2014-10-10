@@ -331,7 +331,7 @@ export FCFLAGS="%{optflags}"
 # (tpg) somehow --prefix is not honored
 sed -i -e 's#/usr/local#%{_prefix}#g' Makeconf
 
-%make
+%make -j1
 make -C src/nmath/standalone
 
 #make check-all

@@ -46,6 +46,7 @@ BuildRequires:	gcc-gfortran
 BuildRequires:	gcc-objc
 %if %{with java}
 BuildRequires:	java-rpmbuild
+BuildRequires:	java-devel
 %endif
 BuildRequires:	less
 BuildRequires:	paper-utils

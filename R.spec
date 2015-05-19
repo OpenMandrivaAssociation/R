@@ -1,4 +1,4 @@
-%define		upgrade_from_2_12		1
+%define upgrade_from_2_12 1
 
 # (tpg) really not needed
 # for private copy in /usr/lib/R/share/perl/Text/DelimMatch.pm 
@@ -27,7 +27,7 @@
 Summary:	A language for data analysis and graphics
 Name:		R
 Version:	3.1.1
-Release:	3
+Release:	4
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		http://www.r-project.org

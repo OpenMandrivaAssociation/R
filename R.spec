@@ -26,8 +26,8 @@
 
 Summary:	A language for data analysis and graphics
 Name:		R
-Version:	3.1.1
-Release:	6
+Version:	3.2.2
+Release:	1
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		http://www.r-project.org
@@ -285,6 +285,9 @@ from the R project.  This package provides the static libRmath library.
 
 #-----------------------------------------------------------------------
 %build
+export CC=gcc
+export CXX=g++
+
 # Add PATHS to Renviron for R_LIBS_SITE
 echo 'R_LIBS_SITE=${R_LIBS_SITE-'"'/usr/local/lib/R/site-library:/usr/local/lib/R/library:%{_libdir}/R/library:%{_datadir}/R/library'"'}' >> etc/Renviron.in
 export R_PDFVIEWER="%{_bindir}/xdg-open"

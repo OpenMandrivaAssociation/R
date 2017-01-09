@@ -24,9 +24,11 @@
 %define		libRmath_devel		%{mklibname -d Rmath}
 %define		libRmath_static_devel	%{mklibname -d -s Rmath}
 
+%define		_disable_lto 1
+
 Summary:	A language for data analysis and graphics
 Name:		R
-Version:	3.2.2
+Version:	3.2.5
 Release:	1
 License:	GPLv2+
 Group:		Sciences/Mathematics

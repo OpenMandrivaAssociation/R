@@ -330,6 +330,7 @@ export FCFLAGS="%{optflags}"
 	--with-blas=%{_libdir}				\
 	--enable-R-shlib				\
 	--enable-prebuilt-html				\
+	--disable-openmp				\
 	rdocdir=%{_docdir}/R				\
 	rsharedir=%{_datadir}/R
 ) | grep -A30 'R is now' - > CAPABILITIES

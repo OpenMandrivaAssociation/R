@@ -68,6 +68,7 @@ BuildRequires:	pkgconfig(cairo)
 BuildRequires:	pkgconfig(ice)
 BuildRequires:	pkgconfig(icu-i18n)
 BuildRequires:	pkgconfig(lapack)
+BuildRequires:	pkgconfig(libcurl) >= 7.22.0
 %if %{with system_pcre}
 BuildRequires:	pkgconfig(libpcre)
 %endif

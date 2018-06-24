@@ -54,6 +54,7 @@ BuildRequires:	less
 BuildRequires:	paper-utils
 BuildRequires:	texinfo
 BuildRequires:	texlive
+BuildRequires:	texlive-inconsolata
 BuildRequires:	zip
 BuildRequires:	bzip2-devel
 BuildRequires:	gettext-devel
@@ -69,6 +70,7 @@ BuildRequires:	pkgconfig(ice)
 BuildRequires:	pkgconfig(icu-i18n)
 BuildRequires:	pkgconfig(lapack)
 BuildRequires:	pkgconfig(libcurl) >= 7.22.0
+BuildRequires:	pkgconfig(liblzma)
 %if %{with system_pcre}
 BuildRequires:	pkgconfig(libpcre)
 %endif

@@ -286,7 +286,7 @@ from the R project.  This package provides the static libRmath library.
 ########################################################################
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 
 #-----------------------------------------------------------------------
 %build

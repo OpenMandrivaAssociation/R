@@ -29,7 +29,7 @@
 Summary:	A language for data analysis and graphics
 Name:		R
 Version:	3.5.1
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		http://www.r-project.org
@@ -115,11 +115,13 @@ and called at run time.
 %package	core
 Summary:	The minimal R components necessary for a functional runtime
 Group:		Sciences/Mathematics
-Requires:	cups
+#Requires:	cups
 Requires:	less
 Requires:	perl
 Requires:	sed
-Requires:	texlive
+Requires:	tcl
+Requires:	tk
+#Requires:	texlive
 Requires:	vim
 Requires:	xdg-utils
 # These are the submodules that R-core provides. Sometimes R modules say they

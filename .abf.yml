@@ -1,6 +1,6 @@
 removed_sources:
-  R-3.5.0.tar.gz: 69f9ff4ecc78057095aedc145eb33f66f48b27ed
-sources:
   R-3.5.1.tar.gz: 9314d3d372b05546a33791fbc8dd579c92ebd16b
+sources:
+  R-3.6.3.tar.gz: d2383dabc0d6c70f8a0171a0fb1bfdc31ddb5b52
   R-icons-png.tar.bz2: 4f025c2b40c752f36a4d841b93c730638ae7c040
   R.bash_completion.bz2: 05ddebef0df16f0bf35aecc8fcb702ad5d106e5e

@@ -1,10 +1,11 @@
-%define upgrade_from_2_12 1
-
 # (tpg) really not needed
 # for private copy in /usr/lib/R/share/perl/Text/DelimMatch.pm 
 %define __noautoprov 'KernSmooth.so\\|MASS.so\\|R_X11.so\\|class.so\\|cluster.so\\|foreign.so\\|grDevices.so\\|grid.so\\|internet.so\\|lapack.so\\|lattice.so\\|libRblas.so\\|libRlapack.so\\|methods.so\\|mgcv.so\\|nlme.so\\|nnet.so\\|rpart.so\\|spatial.so\\|splines.so\\|stats.so\\|survival.so\\|tcltk.so\\|tools.so\\|vfonts.so\\|perl\(R::.*\)'
 %define __noautoreq 'libRblas.so\\|libRlapack.so\\|perl\(R::.*\)'
 %define _disable_ld_no_undefined 1
+
+# Because we mix gcc (fortran) with clang (C/C++/Objective-C)
+%global _disable_lto 1
 
 %bcond_without	system_pcre
 
@@ -29,7 +30,7 @@
 Summary:	A language for data analysis and graphics
 Name:		R
 Version:	3.6.3
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		http://www.r-project.org
@@ -45,7 +46,7 @@ BuildRequires:	bison
 BuildRequires:	cups-common
 BuildRequires:	gcc-c++
 BuildRequires:	gcc-gfortran
-BuildRequires:	gcc-objc
+BuildRequires:	pkgconfig(libobjc)
 %if %{with java}
 BuildRequires:	java-rpmbuild
 BuildRequires:	java-devel
@@ -189,13 +190,6 @@ and called at run time.
 	%{_sbindir}/texlive.post
     fi
 
-%if %{upgrade_from_2_12}
-%posttrans core
-    if [ ! -e %{_libdir}/R/doc ]; then
-	ln -sf %{_docdir}/R %{_libdir}/R/doc
-    fi
-%endif
-
 %files		core
 %{_bindir}/*
 %{_datadir}/R
@@ -292,8 +286,8 @@ from the R project.  This package provides the static libRmath library.
 
 #-----------------------------------------------------------------------
 %build
-export CC=gcc
-export CXX=g++
+#export CC=gcc
+#export CXX=g++
 
 # Add PATHS to Renviron for R_LIBS_SITE
 echo 'R_LIBS_SITE=${R_LIBS_SITE-'"'/usr/local/lib/R/site-library:/usr/local/lib/R/library:%{_libdir}/R/library:%{_datadir}/R/library'"'}' >> etc/Renviron.in
@@ -399,10 +393,6 @@ chmod -x %{buildroot}%{_libdir}/R/library/mgcv/CITATION %{buildroot}%{_docdir}/R
 # fight rpm to convert a directory into a symlink if upgrading from
 # previous mandriva packages
 ln -sf ../%{_lib}/R/include %{buildroot}%{_includedir}/R
-
-%if !%{upgrade_from_2_12}
-ln -sf %{_docdir}/R %{buildroot}%{_libdir}/R/doc
-%endif
 
 # Symbolic link for LaTeX
 mkdir -p %{buildroot}%{_texmfdir}/tex/latex

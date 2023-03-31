@@ -30,7 +30,7 @@
 Summary:	A language for data analysis and graphics
 Name:		R
 Version:	3.6.3
-Release:	2
+Release:	3
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		http://www.r-project.org

@@ -55,6 +55,7 @@ BuildRequires:	texinfo
 BuildRequires:	texlive
 BuildRequires:	texlive-inconsolata
 BuildRequires:  texlive-l3backend
+BuildRequires:	which
 BuildRequires:	zip
 BuildRequires:	bzip2-devel
 BuildRequires:	gettext-devel

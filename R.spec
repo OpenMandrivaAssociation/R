@@ -7,8 +7,6 @@
 # Because we mix gcc (fortran) with clang (C/C++/Objective-C)
 %global _disable_lto 1
 
-%bcond_without	system_pcre
-
 %ifarch %{mips} %{arm}
     %bcond_with	java
 %else
@@ -29,8 +27,8 @@
 
 Summary:	A language for data analysis and graphics
 Name:		R
-Version:	3.6.3
-Release:	3
+Version:	4.3.2
+Release:	1
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		http://www.r-project.org
@@ -56,6 +54,7 @@ BuildRequires:	paper-utils
 BuildRequires:	texinfo
 BuildRequires:	texlive
 BuildRequires:	texlive-inconsolata
+BuildRequires:  texlive-l3backend
 BuildRequires:	zip
 BuildRequires:	bzip2-devel
 BuildRequires:	gettext-devel
@@ -72,9 +71,7 @@ BuildRequires:	pkgconfig(icu-i18n)
 BuildRequires:	pkgconfig(lapack)
 BuildRequires:	pkgconfig(libcurl) >= 7.22.0
 BuildRequires:	pkgconfig(liblzma)
-%if %{with system_pcre}
-BuildRequires:	pkgconfig(libpcre)
-%endif
+BuildRequires:	pkgconfig(libpcre2-posix)
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(ncurses)
 BuildRequires:	pkgconfig(pango)
@@ -220,9 +217,7 @@ Requires:	texinfo
 Requires:	texlive
 Requires:	bzip2-devel
 Requires:	pkgconfig(x11)
-%if %{with system_pcre}
-Requires:	pkgconfig(libpcre)
-%endif
+Requires:	pkgconfig(libpcre2-posix)
 Requires:	pkgconfig(tcl)
 Requires:	pkgconfig(tk)
 Requires:	pkgconfig(zlib)
@@ -314,19 +309,12 @@ export FCFLAGS="%{optflags}"
 	--with-cairo					\
 	--with-libpng					\
 	--with-jpeglib					\
-	--with-system-zlib				\
-	--with-system-bzlib				\
-%if %{with system_pcre}
-	--with-system-pcre				\
-%else
-	--without-system-pcre				\
-%endif
-	--with-system-xz				\
+	--with-pcre2				\
 	--with-ICU					\
 	--with-readline					\
 	--disable-BLAS-shlib				\
 	--with-lapack=%{_libdir}			\
-	--with-blas=%{_libdir}				\
+	--with-blas				\
 	--enable-R-shlib				\
 	--enable-prebuilt-html				\
 	--disable-openmp				\

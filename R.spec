@@ -49,6 +49,7 @@ BuildRequires:	pkgconfig(libobjc)
 BuildRequires:	java-rpmbuild
 BuildRequires:	java-devel
 %endif
+BuildRequires:	locales-extra-charsets
 BuildRequires:	less
 BuildRequires:	paper-utils
 BuildRequires:	texinfo

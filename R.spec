@@ -57,6 +57,7 @@ BuildRequires:	texlive
 BuildRequires:	texlive-inconsolata
 BuildRequires:  texlive-l3backend
 BuildRequires:	texlive-pdftexcmds
+BuildRequires:	texlive-collection-fontsrecommended
 BuildRequires:	timezone
 BuildRequires:	which
 BuildRequires:	zip

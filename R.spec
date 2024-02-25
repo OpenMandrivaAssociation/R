@@ -56,10 +56,7 @@ BuildRequires:	texinfo
 BuildRequires:	texlive
 BuildRequires:	texlive-inconsolata
 BuildRequires:  texlive-l3backend
-BuildRequires:	texlive-collection-bibtexextra
-BuildRequires:	texlive-collection-binextra
-BuildRequires:	texlive-collection-luatex
-BuildRequires:	texlive-collection-xetex
+BuildRequires:	texlive-scheme-full
 BuildRequires:	timezone
 BuildRequires:	which
 BuildRequires:	zip

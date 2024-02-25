@@ -56,6 +56,7 @@ BuildRequires:	texinfo
 BuildRequires:	texlive
 BuildRequires:	texlive-inconsolata
 BuildRequires:  texlive-l3backend
+BuildRequires:	texlive-collection-latexextra
 BuildRequires:	timezone
 BuildRequires:	which
 BuildRequires:	zip
@@ -279,8 +280,7 @@ from the R project.  This package provides the static libRmath library.
 
 ########################################################################
 %prep
-%setup -q
-%autopatch -p1
+%autosetup -p1
 
 #-----------------------------------------------------------------------
 %build

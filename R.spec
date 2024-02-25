@@ -56,7 +56,6 @@ BuildRequires:	texinfo
 BuildRequires:	texlive
 BuildRequires:	texlive-inconsolata
 BuildRequires:  texlive-l3backend
-BuildRequires:	texlive-scheme-full
 BuildRequires:	timezone
 BuildRequires:	which
 BuildRequires:	zip
@@ -287,6 +286,11 @@ from the R project.  This package provides the static libRmath library.
 #export CC=gcc
 #export CXX=g++
 
+mkdir t
+sed -e 's/verb=false/verb=true/' /bin/texi2dvi > t/texi2dvi
+chmod +x t/texi2dvi
+export PATH=$PWD/t:$PATH
+
 # Add PATHS to Renviron for R_LIBS_SITE
 echo 'R_LIBS_SITE=${R_LIBS_SITE-'"'/usr/local/lib/R/site-library:/usr/local/lib/R/library:%{_libdir}/R/library:%{_datadir}/R/library'"'}' >> etc/Renviron.in
 export R_PDFVIEWER="%{_bindir}/xdg-open"
@@ -323,17 +327,20 @@ export FCFLAGS="%{optflags}"
 	--disable-openmp				\
 	rdocdir=%{_docdir}/R				\
 	rsharedir=%{_datadir}/R
-) | grep -A30 'R is now' - > CAPABILITIES
+) | tee config.out
+
+grep -A30 'R is now' config.out > CAPABILITIES
 
 # (tpg) somehow --prefix is not honored
 sed -i -e 's#/usr/local#%{_prefix}#g' Makeconf
 
-%make -j1
+%make_build -j 1
 make -C src/nmath/standalone
 
+%make_build pdf
+
 #make check-all
-%make pdf
-# %make info
+#make info
 
 # Uncomment once we fix info pages for R
 # Convert to UTF-8

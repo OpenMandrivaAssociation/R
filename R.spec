@@ -28,7 +28,7 @@
 Summary:	A language for data analysis and graphics
 Name:		R
 Version:	4.3.2
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		http://www.r-project.org

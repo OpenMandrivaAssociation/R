@@ -31,7 +31,7 @@ Version:	4.3.2
 Release:	2
 License:	GPLv2+
 Group:		Sciences/Mathematics
-Url:		http://www.r-project.org
+Url:		https://www.r-project.org
 Source0:	ftp://cran.r-project.org/pub/R/src/base/R-%(echo %{version}|cut -d. -f1)/R-%{version}.tar.gz
 Source1:	macros.R
 Source2:	R-make-search-index.sh

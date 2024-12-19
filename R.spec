@@ -19,20 +19,21 @@
     %define	java_arch		%{_arch}
 %endif
 
+# BLAS lib
+%global blaslib flexiblas
+
 %define		libRmath		%{mklibname Rmath}
 %define		libRmath_devel		%{mklibname -d Rmath}
 %define		libRmath_static_devel	%{mklibname -d -s Rmath}
 
-%define		_disable_lto 1
-
 Summary:	A language for data analysis and graphics
 Name:		R
-Version:	4.3.2
-Release:	2
+Version:	4.3.3
+Release:	1
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		https://www.r-project.org
-Source0:	ftp://cran.r-project.org/pub/R/src/base/R-%(echo %{version}|cut -d. -f1)/R-%{version}.tar.gz
+Source0:	https://cran.r-project.org/src/base/R-%(echo %{version}|cut -d. -f1)/R-%{version}.tar.gz
 Source1:	macros.R
 Source2:	R-make-search-index.sh
 Source3:	R-icons-png.tar.bz2
@@ -69,7 +70,7 @@ BuildRequires:	jpeg-devel
 BuildRequires:	pth-devel
 BuildRequires:	readline-devel
 BuildRequires:	tiff-devel
-BuildRequires:	pkgconfig(blas)
+BuildRequires:	pkgconfig(%{blaslib})
 BuildRequires:	pkgconfig(cairo)
 BuildRequires:	pkgconfig(ice)
 BuildRequires:	pkgconfig(icu-i18n)
@@ -318,12 +319,11 @@ export FCFLAGS="%{optflags}"
 	--with-cairo					\
 	--with-libpng					\
 	--with-jpeglib					\
-	--with-pcre2				\
+	--with-pcre2					\
 	--with-ICU					\
 	--with-readline					\
-	--disable-BLAS-shlib				\
-	--with-lapack=%{_libdir}			\
-	--with-blas				\
+	--with-lapack=					\
+	--with-blas=%{blaslib}				\
 	--enable-R-shlib				\
 	--enable-prebuilt-html				\
 	--disable-openmp				\

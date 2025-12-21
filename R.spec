@@ -41,6 +41,7 @@ Source4:	R.bash_completion.bz2
 Source100:	R.rpmlintrc
 Patch1:		R-3.0.1-menu.patch
 Patch2:		R-3.0.0-gfxdemos.patch
+BuildRequires:	make
 BuildRequires:	bison
 BuildRequires:	cups-common
 BuildRequires:	gcc-c++

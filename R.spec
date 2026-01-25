@@ -48,8 +48,8 @@ BuildRequires:	gcc-c++
 BuildRequires:	gcc-gfortran
 BuildRequires:	pkgconfig(libobjc)
 %if %{with java}
-BuildRequires:	java-rpmbuild
-BuildRequires:	java-devel
+BuildRequires:	rpm-javamacros
+BuildRequires:	jdk-current
 %endif
 BuildRequires:	locales-extra-charsets
 BuildRequires:	less

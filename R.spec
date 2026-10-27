@@ -63,6 +63,7 @@ BuildRequires:	texlive-inconsolata
 BuildRequires:  texlive-l3backend
 BuildRequires:	texlive-pdftexcmds
 BuildRequires:	texlive-collection-fontsrecommended
+BuildRequires:	texlive-cm-super
 BuildRequires:	timezone
 BuildRequires:	which
 BuildRequires:	zip
@@ -358,10 +359,21 @@ english hyphen.tex
 dumylang dumyhyph.tex
 nohyphenation zerohyph.tex
 EOF
+# cm-super ships the EC/TC outlines but no updmap.cfg.d fragment, so the
+# system pdftex.map never mentions them. Rd.sty loads T1 fontenc without
+# the lm option, and \textsc needs eccc1000. A pdftex.map under TEXMFCONFIG
+# is the first one found.
+sysmap=$(kpsewhich pdftex.map)
+mkdir -p "$TEXMFCONFIG/fonts/map/pdftex/updmap"
+cp "$sysmap" "$TEXMFCONFIG/fonts/map/pdftex/updmap/pdftex.map"
+printf '\n' >> "$TEXMFCONFIG/fonts/map/pdftex/updmap/pdftex.map"
+cat /usr/share/texmf-dist/fonts/map/dvips/cm-super/cm-super-t1.map \
+	/usr/share/texmf-dist/fonts/map/dvips/cm-super/cm-super-ts1.map \
+	>> "$TEXMFCONFIG/fonts/map/pdftex/updmap/pdftex.map"
 mktexfmt pdflatex.fmt
 smokedir="$PWD/.texmf-smoke"
 mkdir -p "$smokedir"
-printf '\\documentclass{article}\\begin{document}ok\\end{document}\n' > "$smokedir/t.tex"
+printf '\\documentclass{article}\\usepackage[T1]{fontenc}\\usepackage{textcomp}\\begin{document}\\textsc{ok}\\textquotesingle\\end{document}\n' > "$smokedir/t.tex"
 ( cd "$smokedir" && pdflatex -interaction=nonstopmode t.tex )
 
 %make_build -j 1

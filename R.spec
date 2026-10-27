@@ -55,6 +55,7 @@ BuildRequires:	locales-extra-charsets
 BuildRequires:	less
 BuildRequires:	paper-utils
 BuildRequires:	texinfo
+BuildRequires:	texinfo-tex
 BuildRequires:	texlive
 BuildRequires:	texlive-inconsolata
 BuildRequires:  texlive-l3backend
@@ -291,7 +292,7 @@ from the R project.  This package provides the static libRmath library.
 #export CXX=g++
 
 mkdir t
-sed -e 's/verb=false/verb=true/' /bin/texi2dvi > t/texi2dvi
+sed -e 's/verb=false/verb=true/' %{_bindir}/texi2dvi > t/texi2dvi
 chmod +x t/texi2dvi
 export PATH=$PWD/t:$PATH
 

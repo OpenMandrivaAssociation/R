@@ -359,17 +359,32 @@ english hyphen.tex
 dumylang dumyhyph.tex
 nohyphenation zerohyph.tex
 EOF
-# cm-super ships the EC/TC outlines but no updmap.cfg.d fragment, so the
-# system pdftex.map never mentions them. Rd.sty loads T1 fontenc without
-# the lm option, and \textsc needs eccc1000. A pdftex.map under TEXMFCONFIG
-# is the first one found.
-sysmap=$(kpsewhich pdftex.map)
-mkdir -p "$TEXMFCONFIG/fonts/map/pdftex/updmap"
-cp "$sysmap" "$TEXMFCONFIG/fonts/map/pdftex/updmap/pdftex.map"
-printf '\n' >> "$TEXMFCONFIG/fonts/map/pdftex/updmap/pdftex.map"
-cat /usr/share/texmf-dist/fonts/map/dvips/cm-super/cm-super-t1.map \
-	/usr/share/texmf-dist/fonts/map/dvips/cm-super/cm-super-ts1.map \
-	>> "$TEXMFCONFIG/fonts/map/pdftex/updmap/pdftex.map"
+# updmap merges the full catalogue in texmf-dist and then fails, so a fresh
+# chroot has no pdftex.map for kpsewhich to find. Build one from the maps
+# that are installed, plus cm-super (no updmap.cfg.d fragment; Rd.sty's
+# \textsc needs eccc1000). TEXMFCONFIG is searched first.
+mkdir -p "$TEXMFCONFIG/web2c" \
+	"$TEXMFCONFIG/fonts/map/pdftex/updmap" \
+	"$TEXMFVAR/fonts/map/dvips/updmap" \
+	"$TEXMFVAR/fonts/map/dvipdfmx/updmap" \
+	"$TEXMFVAR/web2c"
+{
+	if [ -d /usr/share/tlpkg/updmap.cfg.d ]; then
+		find /usr/share/tlpkg/updmap.cfg.d -maxdepth 1 -type f ! -name '.*' -print \
+			| LC_ALL=C sort \
+			| while IFS= read -r f; do
+				cat "$f"
+				echo
+			done
+	fi
+	printf 'Map cm-super-t1.map\nMap cm-super-ts1.map\n'
+} > "$TEXMFCONFIG/web2c/updmap.cfg"
+TEXMFSYSVAR="$TEXMFVAR" TEXMFSYSCONFIG="$TEXMFCONFIG" \
+	updmap-sys --cnffile "$TEXMFCONFIG/web2c/updmap.cfg" \
+		--pdftexoutputdir "$TEXMFCONFIG/fonts/map/pdftex/updmap" \
+		--dvipsoutputdir "$TEXMFVAR/fonts/map/dvips/updmap" \
+		--dvipdfmxoutputdir "$TEXMFVAR/fonts/map/dvipdfmx/updmap" \
+		--nohash --force
 mktexfmt pdflatex.fmt
 smokedir="$PWD/.texmf-smoke"
 mkdir -p "$smokedir"

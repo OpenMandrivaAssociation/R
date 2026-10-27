@@ -340,6 +340,19 @@ grep -A30 'R is now' config.out > CAPABILITIES
 # (tpg) somehow --prefix is not honored
 sed -i -e 's#/usr/local#%{_prefix}#g' Makeconf
 
+# pdflatex.fmt is generated, not packaged. R builds NEWS.pdf with
+# pdflatex's output discarded, so a failed format build exits before
+# NEWS.log exists and the TeX error never reaches the build log.
+# Keep the format in the build tree, which this user can always write.
+export TEXMFVAR="$PWD/.texmf-var"
+export TEXMFCONFIG="$PWD/.texmf-config"
+mkdir -p "$TEXMFVAR" "$TEXMFCONFIG"
+mktexfmt pdflatex.fmt
+smokedir="$PWD/.texmf-smoke"
+mkdir -p "$smokedir"
+printf '\\documentclass{article}\\begin{document}ok\\end{document}\n' > "$smokedir/t.tex"
+( cd "$smokedir" && pdflatex -interaction=nonstopmode t.tex )
+
 %make_build -j 1
 make -C src/nmath/standalone
 

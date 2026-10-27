@@ -42,6 +42,7 @@ Source100:	R.rpmlintrc
 Patch1:		R-3.0.1-menu.patch
 Patch2:		R-3.0.0-gfxdemos.patch
 BuildRequires:	make
+BuildRequires:	gnu-config
 BuildRequires:	bison
 BuildRequires:	cups-common
 BuildRequires:	gcc-c++
@@ -303,14 +304,14 @@ export R_PRINTCMD="lpr"
 export R_BROWSER="%{_bindir}/xdg-open"
 
 # instead of "BuildConflicts: R-core" and/or R-foo packages
-if [ -x %{bindir}/Rscript ]; then
+if [ -x %{_bindir}/Rscript ]; then
     mkdir bin
     ln -sf bin/R bin/Rscript
 fi
 
 export FCFLAGS="%{optflags}"
 %if %{with java}
-    export JAVA_HOME="%{java_home}"
+    export JAVA_HOME="%{_prefix}/lib/jvm/java"
 %endif
 
 (

@@ -346,7 +346,18 @@ sed -i -e 's#/usr/local#%{_prefix}#g' Makeconf
 # Keep the format in the build tree, which this user can always write.
 export TEXMFVAR="$PWD/.texmf-var"
 export TEXMFCONFIG="$PWD/.texmf-config"
-mkdir -p "$TEXMFVAR" "$TEXMFCONFIG"
+mkdir -p "$TEXMFVAR" "$TEXMFCONFIG/tex/generic/config"
+# hyphen-base lists every language here, but the pattern files are in
+# separate texlive-hyphen-* packages. NEWS.pdf is English, and hyphen.tex,
+# dumyhyph.tex, and zerohyph.tex ship in hyphen-base itself.
+cat > "$TEXMFCONFIG/tex/generic/config/language.dat" <<'EOF'
+english hyphen.tex
+=usenglish
+=USenglish
+=american
+dumylang dumyhyph.tex
+nohyphenation zerohyph.tex
+EOF
 mktexfmt pdflatex.fmt
 smokedir="$PWD/.texmf-smoke"
 mkdir -p "$smokedir"

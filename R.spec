@@ -58,6 +58,7 @@ BuildRequires:	paper-utils
 BuildRequires:	texinfo
 BuildRequires:	texinfo-tex
 BuildRequires:	texlive
+BuildRequires:	texlive-collection-latex
 BuildRequires:	texlive-inconsolata
 BuildRequires:  texlive-l3backend
 BuildRequires:	texlive-pdftexcmds
